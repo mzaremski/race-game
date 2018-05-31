@@ -1,3 +1,5 @@
+"use strict";
+
 const gameObject = function(player){
     this.sprite = new PIXI.Sprite(PIXI.utils.TextureCache[player.imageSrc]);
     this.sprite.x = player.x;

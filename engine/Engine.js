@@ -1,3 +1,5 @@
+"use strict";
+
 let onConnection = require('./onConnection.js')
 
 const Engine = {

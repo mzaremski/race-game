@@ -1,3 +1,5 @@
+"use strict";
+
 const stagesConfig = {
     default: {
         name: "default",

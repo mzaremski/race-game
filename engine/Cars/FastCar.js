@@ -1,3 +1,5 @@
+"use strict";
+
 function FastCar() {
     this.modelName = "Fast Car"
     this.acceleration = 1.07;

@@ -1,3 +1,4 @@
+"use strict";
 // W - 87
 // A - 65
 // S - 83
@@ -10,7 +11,7 @@ const Keyboard = {
     onKeyUp: (e) => {
         Keyboard.pressed["key_" + e.keyCode] = false;
     },
-    
+
 }
 
 

@@ -1,3 +1,5 @@
+"use strict";
+
 const VAR = {
     fps:60,
     W: 0,

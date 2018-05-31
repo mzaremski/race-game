@@ -1,3 +1,5 @@
+"use strict";
+
 const Player = require('./Player')
 const Send = require('./Send')
 const Control = require('./Control')

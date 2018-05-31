@@ -1,3 +1,4 @@
+"use strict";
 /* Room */
 
 const stagesConfig = require('./stagesConfig')

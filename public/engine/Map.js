@@ -1,3 +1,5 @@
+"use strict";
+
 const Map = function(app){
 
     this.init = function(stage){

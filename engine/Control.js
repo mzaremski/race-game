@@ -1,3 +1,5 @@
+"use strict";
+
 const Control = {
     computePosition(player, keyboardData){
         if(keyboardData.key_87){//W

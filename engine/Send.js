@@ -1,3 +1,5 @@
+"use strict";
+
 var Send = {
     toPlayer: function(sock, nameOfEmit, message){
         sock.emit(nameOfEmit, message);
