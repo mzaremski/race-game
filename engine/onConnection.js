@@ -6,15 +6,15 @@ const Control = require('./Control')
 
 const allSockets = []
 
-function onConnection(sock){
-    sock.on('join', function(sockData){
-        allSockets.push(sock)
+function onConnection(io){
+    io.on('join', function(ioData){
+        allSockets.push(io)
     })
 
 
-    sock.on('disconnect', function(){
-        // var user = Player.registered[sock.nick];
-        // console.log("Player: " + sock.nick + " opuścił serwer!");
+    io.on('disconnect', function(){
+        // var user = Player.registered[io.nick];
+        // console.log("Player: " + io.nick + " opuścił serwer!");
         //
         // if(user){
         //     if(user.room){
@@ -23,26 +23,26 @@ function onConnection(sock){
         //         Send.toRegistered("updateRoomData", [Room.packRoom(oldRoom)]);
         //     }
         //
-        //     delete Player.registered[sock.nick];
+        //     delete Player.registered[io.nick];
         //
         // }
     })
 
 
-    sock.on('setNick', function(nick){
-        var registeredSuccess = Player.register(nick, sock) //Player.register if success - return Player object
+    io.on('setNick', function(nick){
+        var registeredSuccess = Player.register(nick, io) //Player.register if success - return Player object
         if( registeredSuccess ){
-            Send.toPlayer( sock , "setNick", registeredSuccess.getDataToClient());
+            Send.toPlayer( io , "setNick", registeredSuccess.getDataToClient());
         }else{
-            sock.emit("error", "Player registration failed");
+            io.emit("error", "Player registration failed");
         }
     });
 
 
-    sock.on('keyboardData', function(keyboardData){
-        const player = Player.registered[sock.nick];
+    io.on('keyboardData', function(keyboardData){
+        const player = Player.registered[io.nick];
         Control.computePosition(player, keyboardData)
-        sock.emit( "computedPosition", player.getDataToClient() )
+        io.emit( "computedPosition", player.getDataToClient() )
     })
 }
 

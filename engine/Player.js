@@ -42,8 +42,6 @@ Player.register = function(nick, sock){
         Player.numberOfAll++;
         Player.registered[nick] = new Player(nick, sock, Player.numberOfAll);
 
-        console.log("eee", Player.prototype)
-
         return Player.registered[nick]
     }else{
         return false
