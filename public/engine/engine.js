@@ -45,7 +45,7 @@ sock.on("computedPosition", function(player){
 
     client.sprite.x = player.x;
     client.sprite.y = player.y;
-    client.sprite.rotation = player.rotation;
+    client.sprite.rotation = player.rotation +1.5707;
 })
 
 
@@ -57,7 +57,8 @@ const Game = {
         this.app = new PIXI.Application({width: VAR.W, height: VAR.H});
 
         document.body.appendChild(this.app.view);
-        sock.emit("setNick", prompt("PROSZĘ PODAĆ NICK"))
+        //sock.emit("setNick", prompt("PROSZĘ PODAĆ NICK"))
+        sock.emit("setNick", "johnSmith" + VAR.rand(1, 100000))
 
 
         window.addEventListener("resize", Game.setVAR)

@@ -2,14 +2,15 @@
 
 function FastCar() {
     this.modelName = "Fast Car"
-    this.acceleration = 1.07;
+    this.acc = 0.05;//Acceleration
     this.weight = 1700;
-    this.brakePower = 0.8;
-    this.adhesion = 10//przyczepnośc
-    this.rotationSpeed = 0.07//szybkośc skrętu
+    this.brakePower = 0.08;
+    this.engineBraking = 0.4;
+    this.stick = 1; // stick car to the ground 0-1
+    this.rotationSpeed = 0.1;//szybkośc skrętu
     this.hp = 100;
-    this.maxSpeed = 1000;
-    this.currentlySpeed = 0;
+    this.speed = 0;
+    this.maxSpeed = 30;
     this.imageSrc = "img/cars/car_green_3.png"
 }
 

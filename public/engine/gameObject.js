@@ -6,7 +6,7 @@ const gameObject = function(player){
     this.sprite.y = player.y;
     this.sprite.rotation = player.rotation;
     this.sprite.anchor.x = 0.5;
-    this.sprite.anchor.y = 0.5;
+    this.sprite.anchor.y = 0.7;
 
     return Object.assign(this, player)
 }

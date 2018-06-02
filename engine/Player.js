@@ -13,7 +13,12 @@ function Player(nick, sock, id){
     this.id = id;
     this.x = 400;
     this.y = 400;
-    this.rotation = 1;
+    this.rotation = 0;//Rotation Angle
+
+    this.modX = 0;
+    this.modY = 0;
+
+    this.currSpeed = 0;
 
     FastCar.call(this);
 
