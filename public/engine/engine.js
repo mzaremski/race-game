@@ -45,7 +45,7 @@ sock.on("computedPosition", function(player){
 
     client.sprite.x = player.x;
     client.sprite.y = player.y;
-    client.sprite.rotation = player.rotation +1.5707;
+    client.sprite.rotation = player.rotation + 1.5707;// 1.5707 is 90degree in radians.
 })
 
 
@@ -53,7 +53,7 @@ sock.on("computedPosition", function(player){
 
 const Game = {
     init(){
-        this.setVAR();//set VAR settings
+        this.setVAR();//set VAR settings like Height/Width canvas
         this.app = new PIXI.Application({width: VAR.W, height: VAR.H});
 
         document.body.appendChild(this.app.view);
@@ -76,30 +76,13 @@ const Game = {
         Map.draw(this.app);
 
 
-        ///////CARS
-        gameObject.draw(this.gameData.players, Game.app)
-
-        // var auto = new FastCar({x: VAR.W/2, y: VAR.H/2});
-        // auto.hello()
-        // auto.control()
-
-        //Car.draw(this.app)
+        ///////CARS and map OBJECTS
+        gameObject.draw(this.gameData.players, Game.app)//Draw Cars
     },
 
     gameData:{
-        map:{
-            //name: "default"
-        },
-        players: {}
-            // Stefan:{
-            //     nick: "Stefan",
-            //     carModel: "fastCar",
-            //     x: 10,
-            //     y: 10,
-            //     currentlySpeed: 0,
-            //     rotation: 0
-            // }
-        ,
+        map:{},
+        players: {},
         messges: []
     },
 

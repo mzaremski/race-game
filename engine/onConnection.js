@@ -30,7 +30,7 @@ function onConnection(sock){
 
 
     sock.on('setNick', function(nick){
-        const registeredSuccess = Player.register(nick, sock) //Player.register if success - return Player object
+        var registeredSuccess = Player.register(nick, sock) //Player.register if success - return Player object
         if( registeredSuccess ){
             Send.toPlayer( sock , "setNick", registeredSuccess.getDataToClient());
         }else{

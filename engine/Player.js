@@ -1,6 +1,7 @@
 "use strict";
 
-const FastCar = require("./Cars/FastCar")
+const SedanCar = require("./Cars/SedanCar")
+const SportCar = require("./Cars/SportCar")
 
 
 
@@ -20,11 +21,18 @@ function Player(nick, sock, id){
 
     this.currSpeed = 0;
 
-    FastCar.call(this);
-
-    console.log("Registered: " + this.nick + " o id: " + this.id)
+    const car = Player.randomCar();
+    car.call(this);
+    Player.prototype = Object.assign(car.prototype, Player.prototype);
 }
-Player.prototype = Object.create(FastCar.prototype);
+
+
+
+Player.randomCar = function(){
+    const number = Math.round(Math.random())//random 1 or 0
+    return number ? SportCar : SedanCar;
+}
+
 
 
 
@@ -33,6 +41,8 @@ Player.register = function(nick, sock){
     if(!Player.registered[nick]){
         Player.numberOfAll++;
         Player.registered[nick] = new Player(nick, sock, Player.numberOfAll);
+
+        console.log("eee", Player.prototype)
 
         return Player.registered[nick]
     }else{

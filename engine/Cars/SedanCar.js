@@ -1,7 +1,7 @@
 "use strict";
 
-function FastCar() {
-    this.modelName = "Fast Car"
+function SedanCar() {
+    this.modelName = "SedanCar"
     this.acc = 0.05;//Acceleration
     this.weight = 1700;
     this.brakePower = 0.08;
@@ -14,9 +14,9 @@ function FastCar() {
     this.imageSrc = "img/cars/car_green_3.png"
 }
 
-FastCar.prototype.hello = function(){
+SedanCar.prototype.hello = function(){
     console.log("Helo, my name is: " + this.modelName)
 }
 
 
-module.exports = FastCar
+module.exports = SedanCar
