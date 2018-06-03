@@ -25,6 +25,7 @@ function onConnection(io){
         if( registeredSuccess ){
             Send.toRegistered( "addPlayer", Player.getPlayersData());
             Send.toPlayer(registeredSuccess.socket, "startGame");
+            Send.toPlayer(registeredSuccess.socket, "setNick", nick);
         }else{
             io.emit("error", "Player registration failed");
         }

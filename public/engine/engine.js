@@ -1,11 +1,12 @@
 "use strict";
 const PIXI = require("pixi.js");
 const VAR = require("./VAR.js");
-const Map = new (require("./Map.js"));
+const Map = require("./Map.js");
 const Loader = require("./Loader.js");
 const gameObject = require("./gameObject.js");
 const Keyboard = require("./Keyboard.js");
 const stagesConfig = require("./stagesConfig.js");
+const Camera = require("./Camera.js");
 const io = require("socket.io-client");
 
 const clientEvents = require('./clientEvents')
@@ -28,6 +29,11 @@ window.addEventListener(
 socket.on("error", function(message){
     console.error(message);
 })
+
+socket.on("setNick", function(nick){
+    socket.nick = nick;
+})
+
 socket.on("addPlayer", function(playersData){
     for(var i in playersData){
         if(!Game.gameData.players[i]){
@@ -35,18 +41,20 @@ socket.on("addPlayer", function(playersData){
         }
     }
 })
+
 socket.on("startGame", ()=>{Game.start()})
+
 socket.on("playersData", function(data){
     const players = Game.gameData.players
+
+    Camera.followPlayer(players[socket.nick], data[socket.nick])
 
     for(var i in players){
         const player = players[i]
 
-        if(data[i]){
-            player.sprite.x = data[i].x;
-            player.sprite.y = data[i].y;
-            player.sprite.rotation = data[i].rotation + 1.5708;// 1.5708 is 90degree in radians.
-        }else{//if somebody disconnect
+        if(data[i] && ( data[i].nick !== socket.nick )){//if player is diffrent from client player
+            Camera.setPlayerPosition(player, data[i])//set player position in reference to client player
+        }else if(player.nick !== socket.nick){//if somebody disconnect
             gameObject.deleteUnexist(players[i], Game.app)
             delete players[i]
         }

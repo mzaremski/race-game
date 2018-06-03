@@ -1,15 +1,20 @@
 "use strict";
+const VAR = require("./VAR.js");
 
-const Map = function(app){
+const Map = {
 
-    this.init = function(stage){
+    init(stage){
         this.mapSprite = new PIXI.Sprite(PIXI.utils.TextureCache[stage.mapSrcImage]);
-    }
+        VAR.mapWidth = this.mapSprite.width;
+        VAR.mapHeight = this.mapSprite.height;
+    },
 
-    this.draw = function(app){
+    draw(app){
         app.stage.addChild(this.mapSprite);
-    }
+    },
 
+    moveX( x ){ this.mapSprite.x = x },
+    moveY( y ){ this.mapSprite.y = y }
 }
 
 module.exports = Map;
