@@ -18,4 +18,9 @@ gameObject.draw = function(objects, app){
         app.stage.addChild( objects[i].sprite )
     }
 }
+
+gameObject.deleteUnexist = function(player, app){
+    app.stage.removeChild(player.sprite)
+}
+
 module.exports = gameObject

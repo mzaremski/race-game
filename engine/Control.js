@@ -33,7 +33,7 @@ const Control = {
 
         return player
     },
-
+    
     setPlayerPosition(player){
         player.modX = Math.cos(player.rotation) * player.speed
         player.modY = Math.sin(player.rotation) * player.speed

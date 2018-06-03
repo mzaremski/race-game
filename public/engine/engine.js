@@ -11,7 +11,7 @@ const io = require("socket.io-client");
 const clientEvents = require('./clientEvents')
 const socketEvents = require('./socketEvents')
 
-var sock = io('http://localhost:8000');
+var socket = io('http://localhost:8000');
 
 
 
@@ -25,27 +25,33 @@ window.addEventListener(
 
 
 
-sock.on("error", function(message){
+socket.on("error", function(message){
     console.error(message);
 })
-sock.on("setNick", function(player){
-    Game.gameData.players[player.nick] = new gameObject(player)
-
-    Game.start()
+socket.on("addPlayer", function(playersData){
+    for(var i in playersData){
+        if(!Game.gameData.players[i]){
+            Game.gameData.players[i] = new gameObject(playersData[i])
+        }
+    }
 })
-sock.on("gameData", function(data){
-    Game.gameData = data;
-    Game.start();
-})
-sock.on("computedPosition", function(player){
-    const client = Game.gameData.players[player.nick]
+socket.on("startGame", ()=>{Game.start()})
+socket.on("playersData", function(data){
+    const players = Game.gameData.players
 
-    //Uncomment this if you want merge player(from server) and player(from client)
-    //Game.gameData.players[player.nick] = Object.assign( {}, Game.gameData.players[player.nick], player)
+    for(var i in players){
+        const player = players[i]
 
-    client.sprite.x = player.x;
-    client.sprite.y = player.y;
-    client.sprite.rotation = player.rotation + 1.5707;// 1.5707 is 90degree in radians.
+        if(data[i]){
+            player.sprite.x = data[i].x;
+            player.sprite.y = data[i].y;
+            player.sprite.rotation = data[i].rotation + 1.5708;// 1.5708 is 90degree in radians.
+        }else{//if somebody disconnect
+            gameObject.deleteUnexist(players[i], Game.app)
+            delete players[i]
+        }
+    }
+    gameObject.draw(players, Game.app)
 })
 
 
@@ -57,8 +63,8 @@ const Game = {
         this.app = new PIXI.Application({width: VAR.W, height: VAR.H});
 
         document.body.appendChild(this.app.view);
-        //sock.emit("setNick", prompt("PROSZĘ PODAĆ NICK"))
-        sock.emit("setNick", "johnSmith" + VAR.rand(1, 100000))
+        //socket.emit("setNick", prompt("PROSZĘ PODAĆ NICK"))
+        socket.emit("setNick", "johnSmith" + VAR.rand(1, 100000))
 
 
         window.addEventListener("resize", Game.setVAR)
@@ -68,16 +74,12 @@ const Game = {
 
     start: function(){
         setInterval(function(){
-            sock.emit("keyboardData", Keyboard.pressed)
+            socket.emit("keyboardData", Keyboard.pressed)
         }, VAR.timeTickRate)
 
         ///////MAP
         Map.init(stagesConfig.default)
         Map.draw(this.app);
-
-
-        ///////CARS and map OBJECTS
-        gameObject.draw(this.gameData.players, Game.app)//Draw Cars
     },
 
     gameData:{

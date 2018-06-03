@@ -6,9 +6,9 @@ const SportCar = require("./Cars/SportCar")
 
 
 
-function Player(nick, sock, id){
-    sock.nick = nick;
-    this.sock = sock;
+function Player(nick, socket, id){
+    socket.nick = nick;
+    this.socket = socket;
 
     this.nick = nick;
     this.id = id;
@@ -23,7 +23,7 @@ function Player(nick, sock, id){
 
     const car = Player.randomCar();
     car.call(this);
-    Player.prototype = Object.assign(car.prototype, Player.prototype);
+    Player.prototype = Object.assign({}, car.prototype, Player.prototype);
 }
 
 
@@ -37,10 +37,10 @@ Player.randomCar = function(){
 
 
 
-Player.register = function(nick, sock){
+Player.register = function(nick, socket){
     if(!Player.registered[nick]){
         Player.numberOfAll++;
-        Player.registered[nick] = new Player(nick, sock, Player.numberOfAll);
+        Player.registered[nick] = new Player(nick, socket, Player.numberOfAll);
 
         return Player.registered[nick]
     }else{
@@ -50,10 +50,21 @@ Player.register = function(nick, sock){
 
 
 
+Player.getPlayersData = function(){
+    const registered = Player.registered;
+    const data = {}
+    for(var player in registered){
+        data[player] = registered[player].getDataToClient()
+    }
+    return data
+}
+
+
+
 
 //If you want send player obj to client, you must delete player.sock otherwise error (Log: "Maximum call stack size exceeded")
 Player.prototype.getDataToClient = function(){
-    return Object.assign(this, {sock: false})
+    return Object.assign({}, this, {socket: false})
 }
 
 
