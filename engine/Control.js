@@ -6,7 +6,13 @@ const Control = {
             player.speed += ( player.maxSpeed - player.speed ) * player.acc
             this.setPlayerPosition( player )
         }else if( keyboardData.key_83 || keyboardData.key_32){//S or SPACE
-            player.speed = Math.max(0, player.speed - (player.maxSpeed - player.speed + 4) * player.brakePower)
+
+            if(player.speed <= 0 && keyboardData.key_83){//if back a car
+                player.speed = Math.max(player.maxBackwardSpeed, player.speed - player.backwardSpeed)
+            }else{//if press SPACE
+                player.speed = Math.max(0, player.speed - (player.maxSpeed - player.speed + 4) * player.brakePower)
+            }
+
             this.setPlayerPosition( player )
         }else{
             player.speed = Math.max(0, player.speed - player.engineBraking)
@@ -33,7 +39,7 @@ const Control = {
 
         return player
     },
-    
+
     setPlayerPosition(player){
         player.modX = Math.cos(player.rotation) * player.speed
         player.modY = Math.sin(player.rotation) * player.speed

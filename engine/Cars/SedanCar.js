@@ -3,9 +3,11 @@
 function SedanCar() {
     this.modelName = "SedanCar"
     this.acc = 0.05;//Acceleration
+    this.backwardSpeed = 0.2;
+    this.maxBackwardSpeed = -5;
     this.weight = 1700;
     this.brakePower = 0.08;
-    this.engineBraking = 0.4;
+    this.engineBraking = 0.35;
     this.stick = 1; // stick car to the ground 0-1
     this.rotationSpeed = 0.1;//szybkośc skrętu
     this.hp = 100;
