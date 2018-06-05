@@ -22,9 +22,7 @@ const Control = {
 
         if(keyboardData.key_65){//A
             if(player.speed < 3){
-
                 player.rotation -= player.speed * ( player.speed > 0 ? 0.035 : 0.02)
-                console.timeEnd('someFunction');
             }else{
                 player.rotation -= player.rotationSpeed
             }

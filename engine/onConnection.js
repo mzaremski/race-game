@@ -32,6 +32,7 @@ function onConnection(io){
     });
 
     io.on('keyboardData', function(keyboardData){
+        io.emit("logMessage", {player: Player.registered[io.nick].getDataToClient(), keyboardData})
         Control.computePosition(Player.registered[io.nick], keyboardData)
     })
 }
