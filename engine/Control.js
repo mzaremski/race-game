@@ -2,12 +2,12 @@
 
 const Control = {
     computePosition( player, keyboardData ){
-        if(keyboardData.key_87){//W
+        if(keyboardData.key_87 && !keyboardData.key_32){//W if not press space
             player.speed += ( player.maxSpeed - player.speed ) * player.acc
             this.setPlayerPosition( player )
         }else if( keyboardData.key_83 || keyboardData.key_32){//S or SPACE
 
-            if(player.speed <= 0 && keyboardData.key_83){//if back a car
+            if(player.speed <= 0 && keyboardData.key_83 && !keyboardData.key_32){//if back a car
                 player.speed = Math.max(player.maxBackwardSpeed, player.speed - player.backwardSpeed)
             }else{//if press SPACE
                 player.speed = Math.max(0, player.speed - (player.maxSpeed - player.speed + 4) * player.brakePower)
@@ -22,7 +22,9 @@ const Control = {
 
         if(keyboardData.key_65){//A
             if(player.speed < 3){
-                player.rotation -= player.speed/30
+
+                player.rotation -= player.speed * ( player.speed > 0 ? 0.035 : 0.02)
+                console.timeEnd('someFunction');
             }else{
                 player.rotation -= player.rotationSpeed
             }
@@ -31,7 +33,7 @@ const Control = {
 
         if(keyboardData.key_68){//D
             if(player.speed < 3){
-                player.rotation += player.speed/30
+                player.rotation += player.speed * ( player.speed > 0 ? 0.035 : 0.02)
             }else{
                 player.rotation += player.rotationSpeed
             }
