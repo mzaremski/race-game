@@ -54,18 +54,19 @@ socket.on("startGame", ()=>{Game.start()})
 socket.on("vehiclesData", function(vehicles){
     const players = Game.gameData.players
 
-    Camera.followPlayer(players[socket.nick], vehicles[socket.nick], Game.app)
-
     for(var i in players){
         const player = players[i]
+        player.vehicle = vehicles[i]
 
-        if(vehicles[i] && ( vehicles[i].nick !== socket.nick )){//if player is diffrent from client player
-            Camera.setPlayerPosition(player, vehicles[i])//set player position in reference to client player
-        }else if(player.nick !== socket.nick){//if somebody disconnect
+        if(vehicles[i]){
+            Camera.setPlayerPosition(player)
+        }else{//if somebody disconnect
             gameObject.deleteUnexist(players[i], Game.app)
             delete players[i]
         }
     }
+
+    Camera.followPlayer(players[socket.nick], Game.app)
 
     gameObject.draw(players, Game.app)
 })
@@ -77,13 +78,14 @@ const Game = {
     init(){
         this.setVAR();//set VAR settings like Height/Width canvas
         this.app = new PIXI.Application({width: VAR.W, height: VAR.H});
+        //this.resizeWindow();//set VAR settings like Height/Width canvas
 
         document.body.appendChild(this.app.view);
         //socket.emit("setNick", prompt("PROSZĘ PODAĆ NICK"))
         socket.emit("setNick", "johnSmith" + VAR.rand(1, 100000))
 
 
-        window.addEventListener("resize", Game.setVAR)
+        window.addEventListener("resize", Game.resizeWindow)
         window.addEventListener("keydown", Keyboard.onKeyDown)
         window.addEventListener("keyup", Keyboard.onKeyUp)
     },
@@ -108,6 +110,12 @@ const Game = {
         VAR.W = window.innerWidth;
         VAR.H = window.innerHeight;
         VAR.d = Math.min(VAR.W, VAR.H);
+    },
+
+    resizeWindow(){
+        Game.setVAR()
+        Game.app.renderer.resize(VAR.W, VAR.H);
+        Camera.followPlayer(Game.gameData.players[socket.nick], Game.app)
     },
 
     stop: function(){
