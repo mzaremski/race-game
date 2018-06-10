@@ -2,18 +2,24 @@
 
 function SedanCar() {
     this.modelName = "SedanCar"
-    this.acc = 0.05;//Acceleration
-    this.backwardSpeed = 0.2;
-    this.maxBackwardSpeed = -5;
-    this.weight = 1700;
-    this.brakePower = 0.08;
-    this.engineBraking = 0.35;
-    this.stick = 1; // stick car to the ground 0-1
-    this.rotationSpeed = 0.1;//szybkośc skrętu
-    this.hp = 100;
-    this.speed = 0;
-    this.maxSpeed = 30;
-    this.imageSrc = "img/cars/car_green_3.png"
+    this.imageSrc = "img/cars/car_green_3.png";
+    this.width = 70;
+    this.height = 131;
+
+    this.frontWheelPosition = [0, 30]
+    this.backWheelPosition = [0, -30]
+    this.frontWheelSideFriction = 800
+    this.backWheelSideFriction = 710
+
+    this.power = 800;
+    this.brakePower = 700;
+    this.engineBraking = 0;
+    this.mass = 1;
+    this.steerValue = 0.4
+    this.driftWheelFriction = 200;
+    this.driftengineForce = 500;
+    this.driftsetBrakeForce = 0;
+    //this.life = 100;
 }
 
 SedanCar.prototype.hello = function(){

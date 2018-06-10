@@ -2,11 +2,13 @@
 
 const gameObject = function(player){
     this.sprite = new PIXI.Sprite(PIXI.utils.TextureCache[player.imageSrc]);
-    this.sprite.x = player.x;
-    this.sprite.y = player.y;
-    this.sprite.rotation = player.rotation;
+    // this.sprite.x = player.x;
+    // this.sprite.y = player.y;
+    // this.sprite.rotation = player.rotation;
     this.sprite.anchor.x = 0.5;
-    this.sprite.anchor.y = 0.65;
+    this.sprite.anchor.y = 0.5;
+    //this.sprite.alpha = 0.6;
+    this.debugPoints = [];
 
     return Object.assign(this, player)
 }

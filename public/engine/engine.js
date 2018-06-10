@@ -7,6 +7,7 @@ const gameObject = require("./gameObject.js");
 const Keyboard = require("./Keyboard.js");
 const stagesConfig = require("./stagesConfig.js");
 const Camera = require("./Camera.js");
+const debugRender = require("./debugRender.js");
 const io = require("socket.io-client");
 
 const clientEvents = require('./clientEvents')
@@ -30,6 +31,12 @@ socket.on("error", function(message){
     console.error(message);
 })
 
+socket.on("message", function(message){
+    console.log(message);
+})
+
+//socket.on("showPoints", (points)=>{ debugRender.renderCarPoints(Game.gameData.players[socket.nick], points, Game.app }))
+
 socket.on("setNick", function(nick){
     socket.nick = nick;
 })
@@ -44,21 +51,22 @@ socket.on("addPlayer", function(playersData){
 
 socket.on("startGame", ()=>{Game.start()})
 
-socket.on("playersData", function(data){
+socket.on("vehiclesData", function(vehicles){
     const players = Game.gameData.players
 
-    Camera.followPlayer(players[socket.nick], data[socket.nick])
+    Camera.followPlayer(players[socket.nick], vehicles[socket.nick], Game.app)
 
     for(var i in players){
         const player = players[i]
 
-        if(data[i] && ( data[i].nick !== socket.nick )){//if player is diffrent from client player
-            Camera.setPlayerPosition(player, data[i])//set player position in reference to client player
+        if(vehicles[i] && ( vehicles[i].nick !== socket.nick )){//if player is diffrent from client player
+            Camera.setPlayerPosition(player, vehicles[i])//set player position in reference to client player
         }else if(player.nick !== socket.nick){//if somebody disconnect
             gameObject.deleteUnexist(players[i], Game.app)
             delete players[i]
         }
     }
+
     gameObject.draw(players, Game.app)
 })
 

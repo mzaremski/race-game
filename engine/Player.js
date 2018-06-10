@@ -12,14 +12,8 @@ function Player(nick, socket, id){
 
     this.nick = nick;
     this.id = id;
-    this.x = 400;
-    this.y = 400;
-    this.rotation = 0;//Rotation Angle
 
-    this.modX = 0;
-    this.modY = 0;
-
-    this.currSpeed = 0;
+    this.position = [400,400]
 
     const car = Player.randomCar();
     car.call(this);
