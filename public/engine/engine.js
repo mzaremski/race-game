@@ -109,13 +109,15 @@ const Game = {
     setVAR(){
         VAR.W = window.innerWidth;
         VAR.H = window.innerHeight;
-        VAR.d = Math.min(VAR.W, VAR.H);
+        VAR.scale = VAR.H/974;//974px Standard innerHeight on 1920x1080 desktop - chrome
     },
 
     resizeWindow(){
         Game.setVAR()
         Game.app.renderer.resize(VAR.W, VAR.H);
         Camera.followPlayer(Game.gameData.players[socket.nick], Game.app)
+        Map.scale(VAR.scale)
+        gameObject.scale(VAR.scale, Game.gameData.players, Game.app)
     },
 
     stop: function(){

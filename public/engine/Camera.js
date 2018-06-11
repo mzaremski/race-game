@@ -12,40 +12,44 @@ const Camera = {
         const vehicleData = player.vehicle;
         player.sprite.rotation = vehicleData.angle + 1.5708 + 1.5708;// 1.5708 is 90degree in radians.
 
+        const positionX = vehicleData.position[0] * VAR.scale
+        const positionY = vehicleData.position[1] * VAR.scale
 
-        if( vehicleData.position[0] < VAR.W/2){//if player is near left edge of map, move only car
+
+
+        if( positionX < VAR.W/2){//if player is near left edge of map, move only car
 
             this.camX = 0;
             Map.moveX( this.camX )
-            player.sprite.x = vehicleData.position[0]
+            player.sprite.x = positionX
 
-        }else if(vehicleData.position[0] + VAR.W/2 > VAR.mapWidth){//if player is near right edge of map, move only car
+        }else if(positionX + VAR.W/2 > VAR.mapWidth){//if player is near right edge of map, move only car
 
-            this.camX = -VAR.mapWidth + VAR.W;
-            player.sprite.x = vehicleData.position[0] + this.camX
+            this.camX = VAR.mapWidth > VAR.W ? -VAR.mapWidth + VAR.W : 0;
+            player.sprite.x = positionX + this.camX
             Map.moveX( this.camX )
 
         }else{//if player is on middle of map, move map
-            Map.moveX( VAR.W/2 - vehicleData.position[0] )
-            this.camX = VAR.W/2 - vehicleData.position[0]
+            Map.moveX( VAR.W/2 - positionX )
+            this.camX = VAR.W/2 - positionX
         }
 
 
-        if(vehicleData.position[1] < VAR.H/2){//if player is near left edge of map, move only car
+        if(positionY < VAR.H/2){//if player is near left edge of map, move only car
 
             this.camY = 0;
             Map.moveY( this.camY )
-            player.sprite.y = vehicleData.position[1] - Map.mapSprite.y;
+            player.sprite.y = positionY - Map.mapSprite.y;
 
-        }else if(vehicleData.position[1] + VAR.H/2 > VAR.mapHeight) {//if player is near right edge of map, move only car
+        }else if(positionY + VAR.H/2 > VAR.mapHeight) {//if player is near right edge of map, move only car
 
-            this.camY = -VAR.mapHeight + VAR.H
-            player.sprite.y = vehicleData.position[1] + this.camY
+            this.camY = VAR.mapHeight > VAR.H ? -VAR.mapHeight + VAR.H : 0;
+            player.sprite.y = positionY + this.camY
             Map.moveY( this.camY )
 
         }else{//if player is on middle of map, move map
 
-            this.camY = VAR.H/2 - vehicleData.position[1]
+            this.camY = VAR.H/2 - positionY
             Map.moveY( this.camY )
         }
     },
@@ -53,8 +57,8 @@ const Camera = {
     setPlayerPosition(player){
         const vehicleData = player.vehicle;
         player.sprite.rotation = vehicleData.angle + 1.5708 + 1.5708;// 1.5708 is 90degree in radians.
-        player.sprite.x = vehicleData.position[0] + this.camX;//set player position in reference to client player(camX)
-        player.sprite.y = vehicleData.position[1] + this.camY;//set player position in reference to client player(camY)
+        player.sprite.x = vehicleData.position[0] * VAR.scale + this.camX;//set player position in reference to client player(camX)
+        player.sprite.y = vehicleData.position[1] * VAR.scale + this.camY;//set player position in reference to client player(camY)
     },
 
     setAllPlayersPosition(players){
