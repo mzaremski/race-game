@@ -17,10 +17,10 @@ const Control = {
             backWheel.setBrakeForce(0);
             backWheel.engineForce = player.power;
         }else if( keyboardData.key_83 ){//S
-            backWheel.engineForce = 0;
-            backWheel.setBrakeForce(player.brakePower);
+            backWheel.engineForce = -700;
+            backWheel.setBrakeForce(0);
         }else if(spaceKey){//SPACE
-            backWheel.engineForce = 500;
+            backWheel.engineForce = 0;
             backWheel.setBrakeForce(100);
             backWheel.setSideFriction(player.driftWheelFriction)
         }else{
