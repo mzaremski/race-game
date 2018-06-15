@@ -2,7 +2,7 @@
 
 const Physics = require('./Physics.js');
 const p2 = require('p2');
-const testMap = require('./maps/test-map/test-map.json');
+const testMap = require('./maps/default-map.json');
 const roadAsphalt = require('./maps/tiles/road-asphalt.js');
 
 const Map = {

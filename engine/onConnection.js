@@ -37,7 +37,9 @@ function onConnection(io){
     });
 
     io.on('keyboardData', function(keyboardData){
-        Control.computePosition(Player.registered[io.nick], keyboardData)
+        if(io.nick){
+            Control.computePosition(Player.registered[io.nick], keyboardData)
+        }
     })
 }
 
