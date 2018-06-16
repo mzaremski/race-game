@@ -31,11 +31,11 @@
     "tileheight": 128,
     "tilesets": [{
             "firstgid": 1,
-            "name": "landGrass"
+            "source": "landGrass"
         },
         {
             "firstgid": 31,
-            "name": "roadAsphalt"
+            "source": "roadAsphalt"
         }
     ],
     "tilewidth": 128,

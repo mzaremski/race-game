@@ -118,7 +118,32 @@ const roadAsphalt = {
         ]
     },
 
-    tile007: undefined, tile008: undefined, tile009: undefined,
+    tile007: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 115,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [34, 12], angle: -1.1 , width: 115 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile008: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-61, -52], angle: -1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile009: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [24, 0], angle: -1.1 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
 
     tile010: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
@@ -174,8 +199,32 @@ const roadAsphalt = {
         return [{ shape: shape1, positionMod: [56, 0 ], angle: -1.57079633 , width: 125 + 7.5/2, height: 7.5*2 }]
     },
 
-    tile017: undefined,
-    tile018: undefined, tile019: undefined,
+    tile017: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-24, 0], angle: -1.1 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile018: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [61, 52], angle: -1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile019: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 118,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-36, -10], angle: -1.1 , width: 118 + 7.5/2, height: 7.5*2 }]
+    },
 
     tile020: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
@@ -264,7 +313,32 @@ const roadAsphalt = {
         ]
     },
 
-    tile027: undefined, tile028: undefined, tile029: undefined,
+    tile027: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-24, 0], angle: 1.1 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile028: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [61, -52], angle: 1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile029: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 115,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-36, 10], angle: 1.1 , width: 115 + 7.5/2, height: 7.5*2 }]
+    },
 
     tile030: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
@@ -381,7 +455,32 @@ const roadAsphalt = {
         ]
     },
 
-    tile037: undefined, tile038: undefined, tile039: undefined,
+    tile037: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 115,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [34, -12], angle: 1.1 , width: 115 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile038: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-61, 52], angle: 1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile039: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [24, 0], angle: 1.1 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
 
     tile040: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
@@ -681,8 +780,45 @@ const roadAsphalt = {
     },
 
     tile074: undefined, tile075: undefined,
-    tile076: undefined, tile077: undefined, tile078: undefined, tile079: undefined, tile080: undefined,
-    tile081: undefined, tile082: undefined, tile083: undefined, tile084: undefined, tile085: undefined,
+    tile076: undefined, tile077: undefined, tile078: undefined, tile079: undefined,
+
+    tile080: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 118,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [5, 37], angle: -0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile081: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [ 0, -23], angle: -0.47079633 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile082: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [ 0, -23], angle: 0.47079633 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile083: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 118,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-5, 37], angle: 0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile084: undefined, tile085: undefined,
     tile086: undefined, tile087: undefined,
 
     tile088: function(){
@@ -694,10 +830,84 @@ const roadAsphalt = {
         return [{ shape: shape1, positionMod: [0, -58], angle: 0 , width: 125 + 7.5/2, height: 7.5*2 }]
     },
 
-    tile089: undefined, tile090: undefined,
-    tile091: undefined, tile092: undefined, tile093: undefined, tile094: undefined, tile095: undefined,
-    tile096: undefined, tile097: undefined, tile098: undefined, tile099: undefined, tile100: undefined,
-    tile101: undefined, tile102: undefined, tile103: undefined, tile104: undefined, tile105: undefined,
+    tile089: undefined,
+
+    tile090: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-52, -60], angle: -0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile091: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [51, 58], angle: -0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile092: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-51, 58], angle: 0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile093: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 20,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [52, -60], angle: 0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile094: undefined, tile095: undefined,
+    tile096: undefined, tile097: undefined, tile098: undefined, tile099: undefined,
+
+    tile100: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [ 0, 23], angle: -0.47079633 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile101: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 118,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [-10, -37], angle: -0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile102: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 118,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [10, -37], angle: 0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile103: function(){
+        const shape1 = new p2.Capsule({ // Capsule below the chassis
+          length: 140,
+          radius: 7.5
+        })
+
+        return [{ shape: shape1, positionMod: [ 0, 23], angle: 0.47079633 , width: 140 + 7.5/2, height: 7.5*2 }]
+    },
+
+    tile104: undefined, tile105: undefined,
     tile106: undefined, tile107: undefined,
 
     tile108: function(){
