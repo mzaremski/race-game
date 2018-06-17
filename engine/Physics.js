@@ -11,7 +11,26 @@ const Physics = {
         const player = Player.registered[nick]
 
         const body = new p2.Body({mass: player.mass, position: player.position})
-        body.addShape(new p2.Box({ width: player.width, height:player.height}))
+        body.addShape(
+            new p2.Box({
+                width: player.width, height:player.height
+            })
+        )
+        body.addShape(
+            new p2.Capsule({ // Second capsule above the trunk
+            	length:  player.width - player.radiusCorner*2,
+            	radius:  player.radiusCorner
+            }),
+            [0, (player.height-player.radiusCorner*2)/2 + 3]
+        )
+        body.addShape(
+            new p2.Capsule({ // Second capsule above the trunk
+            	length:  player.width - player.radiusCorner*2,
+            	radius:  player.radiusCorner
+            }),
+            [0, (player.height-player.radiusCorner*2)/-2 + 3]
+        )
+
 
 
         const vehicle = new p2.TopDownVehicle(body);

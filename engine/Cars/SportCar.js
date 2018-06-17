@@ -3,8 +3,9 @@
 function SportCar() {
     this.modelName = "SportCar"
     this.imageSrc = "img/cars/car_red_5.png";
-    this.width = 70;
+    this.width = 65;
     this.height = 121;
+    this.radiusCorner = 20
 
     this.frontWheelPosition = [0, 30]
     this.backWheelPosition = [0, -30]

@@ -11,7 +11,8 @@ const stagesConfig = {
             //'img/maps/default-map.png',
             'img/maps/monako-map.png',
             'img/cars/car_green_3.png',
-            'img/cars/car_red_5.png'
+            'img/cars/car_red_5.png',
+            'img/cars/f1_car.png'
         ]
     }
 }

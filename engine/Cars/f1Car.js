@@ -1,10 +1,10 @@
 "use strict";
 
-function SedanCar() {
-    this.modelName = "SedanCar"
-    this.imageSrc = "img/cars/car_green_3.png";
-    this.width = 65;
-    this.height = 131;
+function f1Car() {
+    this.modelName = "f1Car"
+    this.imageSrc = "img/cars/f1_car.png";
+    this.width = 50;
+    this.height = 143;
     this.radiusCorner = 20
 
     this.frontWheelPosition = [0, 30]
@@ -12,19 +12,19 @@ function SedanCar() {
     this.frontWheelSideFriction = 800
     this.backWheelSideFriction = 740
 
-    this.power = 800;
+    this.power = 900;
     this.brakePower = 700;
     this.engineBraking = 0;
-    this.mass = 1;
+    this.mass = 0.9;
     this.steerValue = 0.4
     this.driftWheelFriction = 120;
     this.driftBrakeForce = 100;
     //this.life = 100;
 }
 
-SedanCar.prototype.hello = function(){
+f1Car.prototype.hello = function(){
     console.log("Helo, my name is: " + this.modelName)
 }
 
 
-module.exports = SedanCar
+module.exports = f1Car

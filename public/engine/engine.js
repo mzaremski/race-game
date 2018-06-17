@@ -10,9 +10,6 @@ const Camera = require("./Camera.js");
 const debugRender = require("./debugRender.js");
 const io = require("socket.io-client");
 
-const clientEvents = require('./clientEvents')
-const socketEvents = require('./socketEvents')
-
 var socket = io('http://localhost:8000');
 
 

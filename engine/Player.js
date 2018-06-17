@@ -2,6 +2,8 @@
 
 const SedanCar = require("./Cars/SedanCar")
 const SportCar = require("./Cars/SportCar")
+const f1Car = require("./Cars/f1Car")
+const cars = [SedanCar, SportCar, f1Car]
 
 
 
@@ -23,8 +25,11 @@ function Player(nick, socket, id){
 
 
 Player.randomCar = function(){
-    const number = Math.round(Math.random())//random 1 or 0
-    return number ? SportCar : SedanCar;
+    var number = random(0, cars.length-1)
+    return cars[number]
+}
+function random(min, max){
+    return Math.floor(Math.random()*(max-min+1))+min
 }
 
 
