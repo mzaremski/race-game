@@ -6,3 +6,5 @@ public/node_modules
 
 public/js/*
 npm-debug.log
+
+start.sh

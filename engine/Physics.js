@@ -13,7 +13,7 @@ const Physics = {
         const body = new p2.Body({mass: player.mass, position: player.position})
         body.addShape(
             new p2.Box({
-                width: player.width, height:player.height
+                width: player.width, height:player.height - player.radiusCorner*2
             })
         )
         body.addShape(
@@ -21,14 +21,14 @@ const Physics = {
             	length:  player.width - player.radiusCorner*2,
             	radius:  player.radiusCorner
             }),
-            [0, (player.height-player.radiusCorner*2)/2 + 3]
+            [0, (player.height-player.radiusCorner*2)/2]
         )
         body.addShape(
             new p2.Capsule({ // Second capsule above the trunk
             	length:  player.width - player.radiusCorner*2,
             	radius:  player.radiusCorner
             }),
-            [0, (player.height-player.radiusCorner*2)/-2 + 3]
+            [0, (player.height-player.radiusCorner*2)/-2]
         )
 
 

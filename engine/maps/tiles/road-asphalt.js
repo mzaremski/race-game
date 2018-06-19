@@ -129,11 +129,11 @@ const roadAsphalt = {
 
     tile008: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [-61, -52], angle: -1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [-61, -52], angle: -1.1 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile009: function(){
@@ -210,11 +210,11 @@ const roadAsphalt = {
 
     tile018: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [61, 52], angle: -1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [61, 52], angle: -1.1 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile019: function(){
@@ -324,11 +324,11 @@ const roadAsphalt = {
 
     tile028: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [61, -52], angle: 1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [61, -52], angle: 1.1 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile029: function(){
@@ -466,11 +466,11 @@ const roadAsphalt = {
 
     tile038: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [-61, 52], angle: 1.1 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [-61, 52], angle: 1.1 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile039: function(){
@@ -788,7 +788,7 @@ const roadAsphalt = {
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [5, 37], angle: -0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [10, 37], angle: -0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
     },
 
     tile081: function(){
@@ -815,7 +815,7 @@ const roadAsphalt = {
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [-5, 37], angle: 0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [-10, 37], angle: 0.47079633 , width: 118 + 7.5/2, height: 7.5*2 }]
     },
 
     tile084: undefined, tile085: undefined,
@@ -834,38 +834,38 @@ const roadAsphalt = {
 
     tile090: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [-52, -60], angle: -0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [-52, -60], angle: -0.47079633 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile091: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [51, 58], angle: -0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [52, 59], angle: -0.47079633 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile092: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [-51, 58], angle: 0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [-52, 59], angle: 0.47079633 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile093: function(){
         const shape1 = new p2.Capsule({ // Capsule below the chassis
-          length: 20,
+          length: 23,
           radius: 7.5
         })
 
-        return [{ shape: shape1, positionMod: [52, -60], angle: 0.47079633 , width: 20 + 7.5/2, height: 7.5*2 }]
+        return [{ shape: shape1, positionMod: [52, -60], angle: 0.47079633 , width: 23 + 7.5/2, height: 7.5*2 }]
     },
 
     tile094: undefined, tile095: undefined,
