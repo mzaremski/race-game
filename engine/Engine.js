@@ -3,18 +3,15 @@
 const onConnection = require('./onConnection.js')
 const Send = require('./Send.js')
 const Physics = require('./Physics.js');
-const Map = require('./Map.js');
+const Room = require('./Room.js');
 
 const Engine = {
     init(io){
         io.on('connection', onConnection);
 
-        Map.createMap()
+        Room.create()
 
-        setInterval(function(){
-            Send.toRegistered( "vehiclesData", Physics.getVehiclesDataToClient() )
-            Physics.world.step(1/30)
-        }, 33)//30 timeTickRate
+
     }
 }
 

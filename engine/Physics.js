@@ -3,14 +3,18 @@ const p2 = require('p2');
 const Player = require('./Player.js')
 
 const Physics = {
-    world: new p2.World({
-        gravity:[0, 0]
-    }),
     vehicles: {},
+
+    createWorld(){
+        return new p2.World({
+            gravity:[0, 0]
+        })
+    },
+
     createVehicle(nick){
         const player = Player.registered[nick]
 
-        const body = new p2.Body({mass: player.mass, position: player.position})
+        const body = new p2.Body({mass: player.mass, position: player.defaultPosition})
         body.addShape(
             new p2.Box({
                 width: player.width, height:player.height - player.radiusCorner*2
@@ -42,14 +46,11 @@ const Physics = {
         frontWheel.setSideFriction(player.frontWheelSideFriction);
         backWheel.setSideFriction(player.backWheelSideFriction);// Less side friction on back wheel makes it easier to drift
 
-
-        Physics.world.addBody(body)
-        vehicle.addToWorld(Physics.world);
-
-
         vehicle.chassisBody.damping = 0.4
 
         this.vehicles[nick] = vehicle;
+
+        return { vehicle, body }
     },
 
     getDataVehicleToClient(nick){
@@ -58,22 +59,24 @@ const Physics = {
             position: this.vehicles[nick].chassisBody.position,
             angle: this.vehicles[nick].chassisBody.angle
         }
-    },
-
-    getVehiclesDataToClient(){
-        const vehicles = Physics.vehicles;
-        const data = {}
-        for(var i in vehicles){
-            data[i] = this.getDataVehicleToClient(i)
-        }
-        return data
     }
 }
 
 
+p2.TopDownVehicle.prototype.setPosition = function(position){
+    this.body.position = [position.x + 64, position.y + 64]
+    this.body.angle = 3.14
+    //console.log(this.body.position)
+}
+
 p2.TopDownVehicle.prototype.removeFromWorld = function(){
-    Physics.world.islandSplit = false;
-    Physics.world.removeBody(this.body)
+    this.world.islandSplit = false;
+    this.world.removeBody(this.body)
+}
+
+p2.TopDownVehicle.prototype.addToPhysicsWorld = function(physicsWorld){
+    physicsWorld.addBody(this.body)
+    this.addToWorld(physicsWorld);
 }
 
 

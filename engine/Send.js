@@ -7,9 +7,9 @@ var Send = {
         socket.emit(nameOfEmit, message);
     },
 
-    toRoom: function(roomName, nameOfEmit, message){
-        Room.all[roomName].members.forEach(function(member){
-            member.socket.emit(nameOfEmit, message);
+    toPlayers: function(players, nameOfEmit, message){
+        players.forEach(function(player){
+            player.socket.emit(nameOfEmit, message);
         });
     },
 

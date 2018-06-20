@@ -4,54 +4,117 @@ const Physics = require('./Physics.js');
 const p2 = require('p2');
 const gameMap = require('./maps/monako-map.json');
 const roadAsphalt = require('./maps/tiles/road-asphalt.js');
+const allTileSets = { roadAsphalt }
 
-const Map = {
-    tilePacks: { roadAsphalt },
-    tiles: [],
-    createMap(){
-        this.createAllTileSet();
+function Map(mapFile){
+    this.tilePacks = Map.getTilePacks(mapFile),
+    this.physicsWorld = Physics.createWorld()
+    this.respsCoords = [],
+    this.respsTilesNumbers = [],
+    this.tiles = []
+}
 
-        gameMap.layers.forEach((layer) => {
+Map.prototype.buildMap = function(){
+    this.createAllTileSet();
+    this.getRespsTileNumber();
 
-            layer.data.forEach( (item, index) => {
-                const rowNumber = div( index, gameMap.width )
-                const columnNumber = index % gameMap.width
 
-                if( item !== 0 && this.tiles[item] ){
-                    const shapesData = this.tiles[item]()
+    gameMap.layers.forEach((layer) => {
 
-                    shapesData.forEach( (shape)=>{
-                        const tileBody = new p2.Body({
-                           mass: 0,
-                           angle: shape.angle || 0,
-                           position: [
-                               columnNumber * 128 + 64 + shape.positionMod[0],
-                               rowNumber * 128 + 64 + shape.positionMod[1]
-                           ]
-                        });
+        layer.data.forEach( (numberOfCurrentTile, index) => {
+            const rowNumber = div( index, gameMap.width )
+            const columnNumber = index % gameMap.width
 
-                        tileBody.addShape( shape.shape );
-                        Physics.world.addBody(tileBody);
-                    })
-                }
-            })
-        })
-    },
+            if( numberOfCurrentTile !== 0 && this.tiles[numberOfCurrentTile] ){
+                const shapesData = this.tiles[numberOfCurrentTile]()
 
-    createAllTileSet(){
-        const tileNumbers = []
-        
-        gameMap.tilesets.forEach( (set) =>{
-            var indexOfTile
-            indexOfTile = set.firstgid
+                shapesData.forEach( (shape)=>{
+                    const tileBody = new p2.Body({
+                       mass: 0,
+                       angle: shape.angle || 0,
+                       position: [
+                           columnNumber * 128 + 64 + shape.positionMod[0],
+                           rowNumber * 128 + 64 + shape.positionMod[1]
+                       ]
+                    });
 
-            for(var i in this.tilePacks[set.source]){
-                this.tiles[indexOfTile] = this.tilePacks[set.source][i]
-                indexOfTile++
+                    tileBody.addShape( shape.shape );
+                    this.physicsWorld.addBody(tileBody);
+                })
             }
 
+
+            this.getRespCoord(numberOfCurrentTile, columnNumber, rowNumber);
         })
-    }
+    })
+}
+
+
+
+Map.prototype.createAllTileSet = function(){
+    const tileNumbers = []
+
+    gameMap.tilesets.forEach( (set) =>{
+        var indexOfTile
+        indexOfTile = set.firstgid
+
+        for(var i in this.tilePacks[set.source]){
+            this.tiles[indexOfTile] = this.tilePacks[set.source][i]
+            indexOfTile++
+        }
+
+    })
+}
+
+
+
+Map.prototype.getRespsTileNumber = function(){
+    //for(var i in this.tilePacks){//check every tilepack to find number of resp tile
+    //}
+    gameMap.tilesets.forEach( (set) =>{
+        if(set.source == "roadAsphalt"){
+            var respsNumbers = this.tilePacks.roadAsphalt.resps //Array
+            respsNumbers.forEach((numberOfRespTile)=>{
+                this.respsTilesNumbers.push(set.firstgid + numberOfRespTile)
+            })
+        }
+    })
+}
+
+
+
+Map.prototype.getRespCoord = function(numberOfCurrentTile, columnNumber, rowNumber){
+    this.respsTilesNumbers.forEach(respNumber => {
+        if(numberOfCurrentTile === respNumber){
+            this.respsCoords.push({
+                x: columnNumber * 128,
+                y: rowNumber * 128
+            })
+        }
+    })
+},
+
+
+
+
+Map.getTilePacks = function(mapFile){
+    var data = {}
+
+    mapFile.tilesets.forEach( (set) =>{
+        data[set.source] = allTileSets[set.source]
+    })
+
+    return data
+}
+
+Map.create = function(){
+    const createdMap = new Map(gameMap)
+
+    //console.log("TILEPACKS: ", createdMap.tilePacks)
+
+    createdMap.buildMap()
+
+    return createdMap
 }
 
 function div(a, b){

@@ -14,8 +14,9 @@ function Player(nick, socket, id){
 
     this.nick = nick;
     this.id = id;
+    this.room = false;
 
-    this.position = [400,400]
+    this.defaultPosition = [400,400]
 
     const car = Player.randomCar();
     car.call(this);

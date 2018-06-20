@@ -919,10 +919,10 @@ const roadAsphalt = {
         return [{ shape: shape1, positionMod: [0, 57], angle: 3.14159266 , width: 125 + 7.5/2, height: 7.5*2 }]
     },
 
-    tile109: undefined, tile110: undefined
+    tile109: undefined, tile110: undefined,
 
 
 
-
+    resps: [ 76, 89, 99, 109 ], //tile076, tile089, tile099, tile109
 }
 module.exports = roadAsphalt

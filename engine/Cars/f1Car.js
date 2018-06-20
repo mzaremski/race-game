@@ -10,9 +10,9 @@ function f1Car() {
     this.frontWheelPosition = [0, 30]
     this.backWheelPosition = [0, -30]
     this.frontWheelSideFriction = 800
-    this.backWheelSideFriction = 740
+    this.backWheelSideFriction = 790
 
-    this.power = 900;
+    this.power = 950;
     this.brakePower = 700;
     this.engineBraking = 0;
     this.mass = 0.9;
