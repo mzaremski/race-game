@@ -3,12 +3,15 @@ const chalk = require('chalk');
 
 const Control = require('./Control')
 const Player = require('./Player')
+const Physics = require('./Physics')
 
 
 
 const performanceTest = {
     controlModule(){
-        const player = new Player("testOptimization", {}, 0)
+        const player = Player.register("testOptimization", {})
+        const vehicle = Physics.createVehicle("testOptimization")
+
         const keyboardData = {
             key_87: false,
             key_32: false,
@@ -20,7 +23,7 @@ const performanceTest = {
         const timeStart = process.hrtime();
         for(let i in keyboardData){
             i = true;
-            for(let k = 10; k>0;k--){
+            for(let k = 1000; k>0;k--){
                 Control.computePosition(player, keyboardData)
             }
             i = false;
@@ -28,7 +31,7 @@ const performanceTest = {
         const timeEnd = process.hrtime()
         const executeTime = parseHrToMS(timeEnd) - parseHrToMS(timeStart)//in ms
 
-        console.log(getInfoOfExecute("CONTROLMODULE", executeTime, 0.9))
+        console.log(getInfoOfExecute("CONTROLMODULE", executeTime, 2.82))
     },
     everything(){
         performanceTest.controlModule()

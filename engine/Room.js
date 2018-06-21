@@ -44,12 +44,12 @@ Room.prototype.addPlayer = function(player, vehicleData){
     return true
 }
 
-
-Room.prototype.getVehiclesDataToClient = function(nick){
-    var data = {}
+Room.prototype.getVehiclesDataToClient = function(){
+    let data = {}
 
     this.players.forEach((player)=>{
-        data[player.nick] = Physics.getDataVehicleToClient(player.nick)
+        let nick = player.nick
+        data[nick] = Physics.getDataVehicleToClient(nick)
     })
 
     return data

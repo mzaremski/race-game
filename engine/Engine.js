@@ -8,10 +8,6 @@ const Room = require('./Room.js');
 const Engine = {
     init(io){
         io.on('connection', onConnection);
-
-        Room.create()
-
-
     }
 }
 

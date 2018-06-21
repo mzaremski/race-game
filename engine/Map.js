@@ -7,6 +7,7 @@ const roadAsphalt = require('./maps/tiles/road-asphalt.js');
 const allTileSets = { roadAsphalt }
 
 function Map(mapFile){
+    this.mapFile = mapFile
     this.tilePacks = Map.getTilePacks(mapFile),
     this.physicsWorld = Physics.createWorld()
     this.respsCoords = [],
@@ -54,7 +55,7 @@ Map.prototype.buildMap = function(){
 Map.prototype.createAllTileSet = function(){
     const tileNumbers = []
 
-    gameMap.tilesets.forEach( (set) =>{
+    this.mapFile.tilesets.forEach( (set) =>{
         var indexOfTile
         indexOfTile = set.firstgid
 
@@ -69,11 +70,9 @@ Map.prototype.createAllTileSet = function(){
 
 
 Map.prototype.getRespsTileNumber = function(){
-    //for(var i in this.tilePacks){//check every tilepack to find number of resp tile
-    //}
-    gameMap.tilesets.forEach( (set) =>{
+    this.mapFile.tilesets.forEach( (set) =>{//check every tilepack to find number of resp tile
         if(set.source == "roadAsphalt"){
-            var respsNumbers = this.tilePacks.roadAsphalt.resps //Array
+            const respsNumbers = this.tilePacks.roadAsphalt.resps //Array
             respsNumbers.forEach((numberOfRespTile)=>{
                 this.respsTilesNumbers.push(set.firstgid + numberOfRespTile)
             })
@@ -84,11 +83,21 @@ Map.prototype.getRespsTileNumber = function(){
 
 
 Map.prototype.getRespCoord = function(numberOfCurrentTile, columnNumber, rowNumber){
-    this.respsTilesNumbers.forEach(respNumber => {
+    this.respsTilesNumbers.forEach((respNumber, index) => {
         if(numberOfCurrentTile === respNumber){
+            let angle
+
+            switch(index){
+                case 0: angle = 3.14; break;
+                case 1: angle = 4.71; break;
+                case 2: angle = 0; break;
+                case 3: angle = -1.57; break;
+            }
+
             this.respsCoords.push({
                 x: columnNumber * 128,
-                y: rowNumber * 128
+                y: rowNumber * 128,
+                angle
             })
         }
     })
@@ -109,8 +118,6 @@ Map.getTilePacks = function(mapFile){
 
 Map.create = function(){
     const createdMap = new Map(gameMap)
-
-    //console.log("TILEPACKS: ", createdMap.tilePacks)
 
     createdMap.buildMap()
 
