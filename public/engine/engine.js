@@ -32,6 +32,15 @@ socket.on("message", function(message){
     console.log(message);
 })
 
+socket.on("scoreBoard", function(scoreBoard){
+    for(var i in scoreBoard){
+        const lapsTime = scoreBoard[i].lapsTime.map((ms)=>{
+            return VAR.msToTime(ms)
+        })
+        console.log( i , lapsTime )
+    }
+})
+
 //socket.on("showPoints", (points)=>{ debugRender.renderCarPoints(Game.gameData.players[socket.nick], points, Game.app }))
 
 socket.on("setNick", function(nick){
@@ -67,6 +76,8 @@ socket.on("vehiclesData", function(vehicles){
 
     gameObject.draw(players, Game.app)
 })
+
+
 
 
 

@@ -38,6 +38,7 @@
          "source": "landGrass"
       }
  ],
+ "checkpoints":[ [1440, 144, 64, 480], [2432, 1536, 512, 512], [768, 1152, 384, 512]],
  "tilewidth":128,
  "type":"map",
  "version":1,

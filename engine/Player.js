@@ -17,6 +17,7 @@ function Player(nick, socket, id){
     this.room = false;
 
     this.defaultPosition = [400,400]
+    this.currentCheckpoint = 0;
 
     const car = Player.randomCar();
     car.call(this);

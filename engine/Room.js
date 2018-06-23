@@ -3,12 +3,18 @@
 const Map = require('./Map.js');
 const Send = require('./Send.js');
 const Physics = require('./Physics.js');
+const Checkpoints = require('./Checkpoints.js');
+const scoreBoard = require('./scoreBoard.js');
 
 function Room(map, id){
+    const timeTable = new scoreBoard()
+
     this.map = map
     this.playersLimit = map.respsCoords.length
     this.players = []
     this.id = id
+    this.timeTable = timeTable
+    this.checkpoints = new Checkpoints(map.mapFile.checkpoints, timeTable)
 }
 Room.allRooms = []
 Room.countOfRooms = 0
@@ -41,6 +47,8 @@ Room.prototype.addPlayer = function(player, vehicleData){
 
     vehicleData.vehicle.addToPhysicsWorld(this.map.physicsWorld)
 
+    this.timeTable.addPlayer(player.nick)
+
     return true
 }
 
@@ -60,10 +68,13 @@ Room.create = function(){
     const world = room.map.physicsWorld
 
     Room.allRooms.push(room)
-    Room.countOfRooms++
+    Room.countOfRooms ++
+
+    //const checkpoints = new Checkpoints(room.map.mapFile.checkpoints)
 
     setInterval(function(){
         Send.toPlayers(room.players, "vehiclesData", room.getVehiclesDataToClient() )
+        room.checkpoints.check(room.players)
         world.step(1/30)
     }, 33)//30 timeTickRate
 

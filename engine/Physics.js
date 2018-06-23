@@ -66,7 +66,6 @@ const Physics = {
 p2.TopDownVehicle.prototype.setPosition = function(position){
     this.body.position = [position.x + 64, position.y + 64]
     this.body.angle = position.angle
-
 }
 
 p2.TopDownVehicle.prototype.removeFromWorld = function(){
