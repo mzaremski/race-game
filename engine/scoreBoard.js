@@ -15,7 +15,6 @@ scoreBoard.prototype.addPlayer = function(nick){
         startTime: false,
         endTime: false
     }
-    console.log("DODANO: ", nick)
 }
 
 scoreBoard.prototype.removePlayer = function(nick){
@@ -39,7 +38,6 @@ scoreBoard.prototype.playerTime = function(nick, time){
 scoreBoard.prototype.sendScores = function(){
 
     for(let i in this.records){
-
         if(!Player.registered[i]){
             this.removePlayer(i)
         }else{
@@ -50,6 +48,7 @@ scoreBoard.prototype.sendScores = function(){
             )
         }
     }
+    
 }
 
 

@@ -55,10 +55,11 @@ Room.prototype.addPlayer = function(player, vehicleData){
 Room.prototype.getVehiclesDataToClient = function(){
     let data = {}
 
-    this.players.forEach((player)=>{
-        let nick = player.nick
+    var i = this.players.length
+    while(i--){
+        let nick = this.players[i].nick
         data[nick] = Physics.getDataVehicleToClient(nick)
-    })
+    }
 
     return data
 }
@@ -70,10 +71,9 @@ Room.create = function(){
     Room.allRooms.push(room)
     Room.countOfRooms ++
 
-    //const checkpoints = new Checkpoints(room.map.mapFile.checkpoints)
-
+    const sendToPlayers = Send.toPlayers
     setInterval(function(){
-        Send.toPlayers(room.players, "vehiclesData", room.getVehiclesDataToClient() )
+        sendToPlayers(room.players, "vehiclesData", room.getVehiclesDataToClient() )
         room.checkpoints.check(room.players)
         world.step(1/30)
     }, 33)//30 timeTickRate

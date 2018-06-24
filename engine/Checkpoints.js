@@ -2,16 +2,18 @@
 const Physics = require('./Physics.js');
 
 const Checkpoints = function(checkpoints, scoreBoard){
-    console.log(scoreBoard)
     this.checkpoints = checkpoints
     this.scoreBoard = scoreBoard
 }
 
 Checkpoints.prototype.check = function(players){
-    players.forEach((player)=>{
+    var i = players.length
+    while(i--){
+        const player = players[i]
         const p = Physics.vehicles[player.nick].body.position
-        const ch = this.checkpoints[player.currentCheckpoint]
         const current = player.currentCheckpoint
+        const ch = this.checkpoints[current]
+
 
         //p[0] - position X
         //p[1] - position Y
@@ -30,7 +32,7 @@ Checkpoints.prototype.check = function(players){
                 this.scoreBoard.playerTime(player.nick, Date.now())
             }
         }
-    })
+    }
 }
 
 module.exports = Checkpoints

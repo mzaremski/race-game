@@ -8,9 +8,10 @@ var Send = {
     },
 
     toPlayers: function(players, nameOfEmit, message){
-        players.forEach(function(player){
-            player.socket.emit(nameOfEmit, message);
-        });
+        var i = players.length
+        while(i--){
+            players[i].socket.emit(nameOfEmit, message);
+        }
     },
 
     toRegistered: function(nameOfEmit, message){
