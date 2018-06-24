@@ -3,14 +3,10 @@ const VAR = require("./VAR.js");
 
 const gameObject = function(player){
     this.sprite = new PIXI.Sprite(PIXI.utils.TextureCache[player.imageSrc]);
-    // this.sprite.x = player.x;
-    // this.sprite.y = player.y;
-    // this.sprite.rotation = player.rotation;
     this.sprite.anchor.x = 0.5;
     this.sprite.anchor.y = 0.5;
     this.sprite.scale.x = VAR.scale
     this.sprite.scale.y = VAR.scale
-    //this.sprite.alpha = 0.6;
     this.debugPoints = [];
 
     return Object.assign(this, player)
@@ -18,11 +14,30 @@ const gameObject = function(player){
 
 gameObject.all = [];
 
-gameObject.draw = function(objects, app){
+gameObject.prototype.createNick = function(){
+    this.nickRender = new PIXI.Text(
+        this.nick.toUpperCase(),
+        new PIXI.TextStyle({
+              fontFamily: "Righteous",
+              letterSpacing: 2,
+              fontSize: 13,
+              fill: "#000000",
+              stroke: 'white',
+              strokeThickness: 5
+        })
+    );
+}
+
+gameObject.draw = function(objects, stage){
     for( let i in objects ){
-        app.stage.addChild( objects[i].sprite )
+        stage.addChild( objects[i].sprite )
+        if(objects[i].nickRender){
+            stage.addChild( objects[i].nickRender )
+        }
     }
 }
+
+
 
 
 gameObject.scale = function( scale, objects){
@@ -34,8 +49,9 @@ gameObject.scale = function( scale, objects){
 
 
 
-gameObject.deleteUnexist = function(player, app){
-    app.stage.removeChild(player.sprite)
+gameObject.deleteUnexist = function(player, stage){
+    stage.removeChild(player.sprite)
+    stage.removeChild(player.nickRender)
 }
 
 module.exports = gameObject

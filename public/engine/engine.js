@@ -51,6 +51,10 @@ socket.on("addPlayer", function(playersData){
     for(var i in playersData){
         if(!Game.gameData.players[i]){
             Game.gameData.players[i] = new gameObject(playersData[i])
+
+            if(i != socket.nick){
+                Game.gameData.players[i].createNick()
+            }
         }
     }
 })
@@ -67,14 +71,14 @@ socket.on("vehiclesData", function(vehicles){
         if(vehicles[i]){
             Camera.setPlayerPosition(player)
         }else{//if somebody disconnect
-            gameObject.deleteUnexist(players[i], Game.app)
+            gameObject.deleteUnexist(players[i], Game.app.stage)
             delete players[i]
         }
     }
 
     Camera.followPlayer(players[socket.nick], Game.app)
 
-    gameObject.draw(players, Game.app)
+    gameObject.draw(players, Game.app.stage)
 })
 
 

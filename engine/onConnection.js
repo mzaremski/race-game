@@ -44,9 +44,10 @@ function onConnection(io){
         var registeredPlayer = Player.register(nick, io) //Player.register if success - return Player object
         if( registeredPlayer ){
             const roomWhereAdded = Room.addPlayerToEmptyRoom( registeredPlayer, Physics.createVehicle(nick) )
+            Send.toPlayer(registeredPlayer.socket, "setNick", nick);
             Send.toPlayers( roomWhereAdded.players, "addPlayer", Player.getPlayersData());
             Send.toPlayer(registeredPlayer.socket, "startGame");
-            Send.toPlayer(registeredPlayer.socket, "setNick", nick);
+
         }else{
             io.emit("error", "Player registration failed");
         }
