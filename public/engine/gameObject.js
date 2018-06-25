@@ -7,6 +7,8 @@ const gameObject = function(player){
     this.sprite.anchor.y = 0.5;
     this.sprite.scale.x = VAR.scale
     this.sprite.scale.y = VAR.scale
+    this.simulateModX = 0 // data about object position from server are delivery 30 times per second. SimulateMod help client render rest of frames up to 60 fps
+    this.simulateModY = 0 //
     this.debugPoints = [];
 
     return Object.assign(this, player)

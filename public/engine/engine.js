@@ -56,21 +56,19 @@ socket.on("addPlayer", function(playersData){
     }
 })
 
+socket.on("removePlayer", function(nick){
+    gameObject.deleteUnexist(Game.gameData.players[nick], Game.app.stage)
+    delete Game.gameData.players[nick]
+})
+
 socket.on("startGame", ()=>{Game.start()})
 
 socket.on("vehiclesData", function(vehicles){
     const players = Game.gameData.players
 
     for(var i in players){
-        const player = players[i]
-        player.vehicle = vehicles[i]
-
-        if(vehicles[i]){
-            Camera.setPlayerPosition(player)
-        }else{//if somebody disconnect
-            gameObject.deleteUnexist(players[i], Game.app.stage)
-            delete players[i]
-        }
+        players[i].vehicle = vehicles[i]
+        Camera.setPlayerPosition(players[i])
     }
 
     Camera.followPlayer(players[socket.nick], Game.app)
@@ -100,13 +98,16 @@ const Game = {
     },
 
     start: function(){
+        const tickRate = VAR.timeTickRate
         setInterval(function(){
             socket.emit("keyboardData", Keyboard.pressed)
-        }, VAR.timeTickRate)
+        }, tickRate)
 
         ///////MAP
         Map.init(stagesConfig.default)
         Map.draw(this.app);
+
+        //Game.app.ticker.add(delta => Game.gameLoop(delta));
     },
 
     gameData:{
@@ -128,6 +129,10 @@ const Game = {
         Map.scale(VAR.scale)
         gameObject.scale(VAR.scale, Game.gameData.players, Game.app)
     },
+
+    // gameLoop(){
+    //
+    // },
 
     stop: function(){
     }

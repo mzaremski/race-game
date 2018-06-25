@@ -18,23 +18,30 @@ function onConnection(io){
     io.on('disconnect', function(){
         allSockets.splice(allSockets.indexOf(io), 1);
 
-        if(Player.registered[io.nick]){
-            //Remove player from room player list
+        const nick = io.nick
+
+        if(Player.registered[nick]){
             Room.allRooms.some((room)=>{
-                if(room.id === Player.registered[io.nick].roomId){
-                    room.players.splice(room.players.indexOf(Player.registered[io.nick]), 1);
+                if(room.id === Player.registered[nick].roomId){
+
+                    //Remove from server room player list
+                    room.players.splice(room.players.indexOf(Player.registered[nick]), 1);
+
+                    //Remove from client room players
+                    Send.toPlayers(room.players, "removePlayer", nick);
+
                     return room
                 }
             })
 
             //delete player from registered players
-            delete Player.registered[io.nick]
+            delete Player.registered[nick]
 
             //delete player vehicle from world
-            Physics.vehicles[io.nick].removeFromWorld()
+            Physics.vehicles[nick].removeFromWorld()
 
             //delete player vehicle from vehicles
-            delete Physics.vehicles[io.nick]
+            delete Physics.vehicles[nick]
         }
 
     })
