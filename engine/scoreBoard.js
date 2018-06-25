@@ -48,7 +48,7 @@ scoreBoard.prototype.sendScores = function(){
             )
         }
     }
-    
+
 }
 
 

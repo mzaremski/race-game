@@ -2,7 +2,7 @@
 
 const Physics = require('./Physics.js');
 const p2 = require('p2');
-const gameMap = require('./maps/default-map.json');
+const gameMap = require('./maps/monako-map.json');
 const roadAsphalt = require('./maps/tiles/road-asphalt.js');
 const allTileSets = { roadAsphalt }
 

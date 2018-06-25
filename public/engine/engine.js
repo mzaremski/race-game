@@ -7,6 +7,7 @@ const gameObject = require("./gameObject.js");
 const Keyboard = require("./Keyboard.js");
 const stagesConfig = require("./stagesConfig.js");
 const Camera = require("./Camera.js");
+const scoreBoard = require("./scoreBoard.js");
 const debugRender = require("./debugRender.js");
 const io = require("socket.io-client");
 
@@ -32,13 +33,9 @@ socket.on("message", function(message){
     console.log(message);
 })
 
-socket.on("scoreBoard", function(scoreBoard){
-    for(var i in scoreBoard){
-        const lapsTime = scoreBoard[i].lapsTime.map((ms)=>{
-            return VAR.msToTime(ms)
-        })
-        console.log( i , lapsTime )
-    }
+socket.on("scoreBoard", function(scoreData){
+    scoreBoard.update(scoreData)
+    scoreBoard.draw(Game.app.stage)
 })
 
 //socket.on("showPoints", (points)=>{ debugRender.renderCarPoints(Game.gameData.players[socket.nick], points, Game.app }))
@@ -93,7 +90,7 @@ const Game = {
         //this.resizeWindow();//set VAR settings like Height/Width canvas
 
         document.body.appendChild(this.app.view);
-        //socket.emit("setNick", prompt("PROSZĘ PODAĆ NICK"))
+        //socket.emit("setNick", prompt("WPISZ NICK"))
         socket.emit("setNick", "johnSmith" + VAR.rand(1, 100000))
 
 
