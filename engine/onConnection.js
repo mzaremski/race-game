@@ -15,33 +15,26 @@ function onConnection(io){
     })
 
 
-    io.on('disconnect', function(){
+	io.on('disconnect', function(){
         allSockets.splice(allSockets.indexOf(io), 1);
 
-        const nick = io.nick
-
-        if(Player.registered[nick]){
+        if(Player.registered[io.nick]){
+            //Remove player from room player list
             Room.allRooms.some((room)=>{
-                if(room.id === Player.registered[nick].roomId){
-
-                    //Remove from server room player list
-                    room.players.splice(room.players.indexOf(Player.registered[nick]), 1);
-
-                    //Remove from client room players
-                    Send.toPlayers(room.players, "removePlayer", nick);
-
+                if(room.id === Player.registered[io.nick].roomId){
+                    room.players.splice(room.players.indexOf(Player.registered[io.nick]), 1);
                     return room
                 }
             })
 
             //delete player from registered players
-            delete Player.registered[nick]
+            delete Player.registered[io.nick]
 
             //delete player vehicle from world
-            Physics.vehicles[nick].removeFromWorld()
+            Physics.vehicles[io.nick].removeFromWorld()
 
             //delete player vehicle from vehicles
-            delete Physics.vehicles[nick]
+            delete Physics.vehicles[io.nick]
         }
 
     })

@@ -21,68 +21,70 @@ Room.countOfRooms = 0
 
 
 
-Room.addPlayerToEmptyRoom = function(player, vehicleData){
-    let roomWhereAdded
-    var isAdded = Room.allRooms.some((room)=>{
-        if(room.players.length < room.playersLimit){
-            room.addPlayer(player, vehicleData)
-            roomWhereAdded = room
-            return true
-        }
-    })
+Room.addPlayerToEmptyRoom = function(player, vehicleData) {
+  let roomWhereAdded;
 
-    if(!isAdded){
-        let room = Room.create()
-        roomWhereAdded = room
-        room.addPlayer(player, vehicleData)
+  var isAdded = Room.allRooms.some(room => {
+    if (room.players.length < room.playersLimit) {
+      room.addPlayer(player, vehicleData);
+      roomWhereAdded = room;
+      return true;
     }
+  });
 
-    return roomWhereAdded
-}
+  if (!isAdded) {
+    let room = Room.create();
+    roomWhereAdded = room;
+    room.addPlayer(player, vehicleData);
+  }
 
-Room.prototype.addPlayer = function(player, vehicleData){
-    this.players.push(player)
-    player.roomId = this.id
-    Physics.vehicles[player.nick].setPosition(this.map.respsCoords[this.players.indexOf(player)])
+  return roomWhereAdded;
+};
 
-    vehicleData.vehicle.addToPhysicsWorld(this.map.physicsWorld)
+Room.prototype.addPlayer = function(player, vehicleData) {
+  this.players.push(player);
 
-    this.timeTable.addPlayer(player.nick)
+  player.roomId = this.id;
+  Physics.vehicles[player.nick].setPosition(
+    this.map.respsCoords[this.players.indexOf(player)]
+  );
 
-    return true
-}
+  vehicleData.vehicle.addToPhysicsWorld(this.map.physicsWorld);
 
-Room.prototype.getVehiclesDataToClient = function(){
-    let data = {}
+  this.timeTable.addPlayer(player.nick);
 
-    var i = this.players.length
-    while(i--){
-        let nick = this.players[i].nick
-        data[nick] = Physics.getDataVehicleToClient(nick)
-    }
+  return true;
+};
 
-    return data
-}
+Room.prototype.getVehiclesDataToClient = function() {
+  let data = {};
 
-Room.create = function(){
-    const room = new Room( Map.create(), Room.countOfRooms)
-    const world = room.map.physicsWorld
+  var i = this.players.length;
+  while (i--) {
+    let nick = this.players[i].nick;
+    data[nick] = Physics.getDataVehicleToClient(nick);
+  }
 
-    Room.allRooms.push(room)
-    Room.countOfRooms ++
+  return data;
+};
 
-    const sendToPlayers = Send.toPlayers
-    setInterval(function(){
-        sendToPlayers(room.players, "vehiclesData", room.getVehiclesDataToClient() )
-        room.checkpoints.check(room.players)
-        world.step(1/30)
-    }, 33)//30 timeTickRate
+Room.create = function() {
+  const room = new Room(Map.create(), Room.countOfRooms);
+  const world = room.map.physicsWorld;
+  Room.allRooms.push(room);
+  Room.countOfRooms++;
 
-    return room
-}
+  const sendToPlayers = Send.toPlayers;
 
+  setInterval(function() {
+    sendToPlayers(room.players, "vehiclesData", room.getVehiclesDataToClient());
 
+    room.checkpoints.check(room.players);
 
+    world.step(1 / 30);
+  }, 33); //30 timeTickRate
 
+  return room;
+};
 
-module.exports = Room
+module.exports = Room;

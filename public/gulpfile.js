@@ -3,6 +3,7 @@ var watch = require('gulp-watch');
 var browserify = require('gulp-browserify');
 var browserSync = require('browser-sync');
 var sequence = require('run-sequence');
+var plumber = require('gulp-plumber');
 
 
 var src = {
@@ -34,6 +35,10 @@ var config = {
 }
 
 
+const logError = function(err) {
+  gutil.log(err);
+  this.emit('end');
+};
 
 gulp.task('default', ['serve'])
 
@@ -52,6 +57,7 @@ gulp.task('reload', function(){
 
 gulp.task('browserify', function() {
     return gulp.src('engine/engine.js')
+        .pipe(plumber())
         .pipe(browserify({ debug:true }))
         .pipe(gulp.dest('js'))
 });

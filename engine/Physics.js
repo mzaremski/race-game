@@ -10,8 +10,8 @@ const Physics = {
             gravity:[0, 0]
         })
     },
-
-    createVehicle(nick){
+	
+	createVehicle(nick){
         const player = Player.registered[nick]
 
         const body = new p2.Body({mass: player.mass, position: player.defaultPosition})
@@ -57,7 +57,8 @@ const Physics = {
         return {
             nick: nick,
             position: this.vehicles[nick].chassisBody.position,
-            angle: this.vehicles[nick].chassisBody.angle
+            angle: this.vehicles[nick].chassisBody.angle,
+			velocity: this.vehicles[nick].chassisBody.velocity
         }
     }
 }
