@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-		"start": "gulp",
+    "start": "",
+		"watch": "watchify engine/Camera.js engine/debugRender.js engine/engine.js engine/gameObject.js engine/Keyboard.js engine/Loader.js engine/Map.js engine/scoreBoard.js engine/stagesConfig.js engine/VAR.js -o js/engine.js -dv",
+		"browser": "browserify engine/Camera.js engine/debugRender.js engine/engine.js engine/gameObject.js engine/Keyboard.js engine/Loader.js engine/Map.js engine/scoreBoard.js engine/stagesConfig.js engine/VAR.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -18,6 +20,8 @@
     "gulp": "^3.9.1",
     "browser-sync": "^2.24.4",
     "gulp-browserify": "^0.5.1",
+		"browserify": "^16.2.3",
+    "watchify": "^3.11.0",
     "gulp-ignore-errors": "0.0.4",
     "gulp-util": "^3.0.8",
     "gulp-watch": "^5.0.0",

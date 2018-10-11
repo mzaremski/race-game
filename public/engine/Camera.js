@@ -4,7 +4,6 @@ const Map = require("./Map.js");
 const gameObject = require("./gameObject.js");
 const debugRender = require("./debugRender.js");
 
-
 const Camera = {
     camX:0,
     camY:0,
