@@ -8,9 +8,12 @@ let app = express();
 let server = http.createServer(app)
 let io = socketio(server)
 
-let Engine = require("./engine/engine.js")
+app.get('/', (req, res) => res.send(`Hello! Welcome on server of excellent game made by <a href="https://marcinzaremski.pl/">Marcin Zaremski</a>`))
+
+let Engine = require("./engine/Engine.js")
 Engine.init(io);
 
-server.listen(8000, function(){
-    console.log("Ready on port: 8000")
+const port = process.env.PORT || 5000
+server.listen(port, function(){
+    console.log("Ready on port: " + port)
 })
