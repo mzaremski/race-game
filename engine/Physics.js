@@ -10,7 +10,7 @@ const Physics = {
             gravity:[0, 0]
         })
     },
-	
+
 	createVehicle(nick){
         const player = Player.registered[nick]
 

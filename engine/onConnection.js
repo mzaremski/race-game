@@ -23,6 +23,7 @@ function onConnection(io){
             Room.allRooms.some((room)=>{
                 if(room.id === Player.registered[io.nick].roomId){
                     room.players.splice(room.players.indexOf(Player.registered[io.nick]), 1);
+					Send.toPlayers(room.players, "removePlayer", io.nick);
                     return room
                 }
             })
@@ -35,6 +36,7 @@ function onConnection(io){
 
             //delete player vehicle from vehicles
             delete Physics.vehicles[io.nick]
+
         }
 
     })
@@ -45,7 +47,7 @@ function onConnection(io){
         if( registeredPlayer ){
             const roomWhereAdded = Room.addPlayerToEmptyRoom( registeredPlayer, Physics.createVehicle(nick) )
             Send.toPlayer(registeredPlayer.socket, "setNick", nick);
-            Send.toPlayers( roomWhereAdded.players, "addPlayer", Player.getPlayersData());
+            Send.toPlayers(roomWhereAdded.players, "addPlayer", Player.getPlayersData());
             Send.toPlayer(registeredPlayer.socket, "startGame");
 
         }else{
